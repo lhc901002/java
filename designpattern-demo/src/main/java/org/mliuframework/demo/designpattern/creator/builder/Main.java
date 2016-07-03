@@ -1,4 +1,4 @@
-package org.mliuframework.demo.designpattern.structure.builder;
+package org.mliuframework.demo.designpattern.creator.builder;
 
 /**
  * Created by michael on 7/3/2016.

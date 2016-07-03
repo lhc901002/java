@@ -1,4 +1,4 @@
-package org.mliuframework.demo.designpattern.structure.singleton;
+package org.mliuframework.demo.designpattern.creator.singleton;
 
 /**
  * Created by Michael on 7/2/16

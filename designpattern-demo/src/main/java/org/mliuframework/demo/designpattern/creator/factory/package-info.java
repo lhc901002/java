@@ -5,4 +5,4 @@
  * Factory Method Pattern (FMP).
  *
  */
-package org.mliuframework.demo.designpattern.structure.factory;
+package org.mliuframework.demo.designpattern.creator.factory;

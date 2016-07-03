@@ -1,4 +1,4 @@
-package org.mliuframework.demo.designpattern.structure.factory.factorymethod;
+package org.mliuframework.demo.designpattern.creator.factory.factorymethod;
 
 /**
  * Created by Michael on 7/2/16.
