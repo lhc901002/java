@@ -3,7 +3,7 @@ package org.mliuframework.demo.designpattern.behavior.chainofresponsibility;
 /**
  * Created by Michael on 7/4/16.
  */
-abstract class BaseHandler {
+public abstract class BaseHandler {
 
     protected String type;
 
