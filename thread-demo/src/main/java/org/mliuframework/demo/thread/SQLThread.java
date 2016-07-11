@@ -19,6 +19,7 @@ public class SQLThread implements Runnable {
         this.dataSource= dataSource;
     }
 
+    @Override
     public void run() {
         runSQL();
     }
