@@ -1,6 +1,6 @@
-package org.mliuframework.java.serialization;
+package org.michaelliu.java.serialization;
 
-import org.mliuframework.java.entity.Student;
+import org.michaelliu.java.entity.Student;
 
 import java.io.*;
 

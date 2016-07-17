@@ -1,4 +1,4 @@
-package org.mliuframework.java.thread;
+package org.michaelliu.java.thread;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 

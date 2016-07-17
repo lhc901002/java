@@ -1,4 +1,4 @@
-package org.mliuframework.java.util;
+package org.michaelliu.java.util;
 
 import java.util.Random;
 

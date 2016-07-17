@@ -1,10 +1,10 @@
-package org.mliuframework.java.serialization;
+package org.michaelliu.java.serialization;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.KryoException;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import org.mliuframework.java.entity.Student;
+import org.michaelliu.java.entity.Student;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
 import java.io.FileInputStream;

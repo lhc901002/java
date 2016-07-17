@@ -1,7 +1,7 @@
-package org.mliuframework.java.thread;
+package org.michaelliu.java.thread;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.mliuframework.java.util.CharUtils;
+import org.michaelliu.java.util.CharUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

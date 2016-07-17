@@ -1,4 +1,4 @@
-package org.mliuframework.java.entity;
+package org.michaelliu.java.entity;
 
 import java.io.Serializable;
 
