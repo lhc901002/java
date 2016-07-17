@@ -1,4 +1,4 @@
-package org.mliuframework.java.algorithm.sort;
+package org.michaelliu.algorithm.sort;
 
 /**
  * Created by Michael on 2016/6/25.

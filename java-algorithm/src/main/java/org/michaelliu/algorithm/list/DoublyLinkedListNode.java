@@ -1,4 +1,4 @@
-package org.mliuframework.java.algorithm.list;
+package org.michaelliu.algorithm.list;
 
 /**
  * Created by Michael on 2016/6/25.

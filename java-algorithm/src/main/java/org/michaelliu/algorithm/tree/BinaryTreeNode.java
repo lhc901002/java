@@ -1,4 +1,4 @@
-package org.mliuframework.java.algorithm.tree;
+package org.michaelliu.algorithm.tree;
 
 /**
  * Created by Michael on 2016/6/20.
