@@ -1,4 +1,4 @@
-package org.michaelliu.java.io.socket;
+package org.michaelliu.java.nio.socket;
 
 import java.io.IOException;
 import java.net.InetAddress;
