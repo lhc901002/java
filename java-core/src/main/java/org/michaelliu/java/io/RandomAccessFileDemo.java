@@ -15,14 +15,14 @@ public class RandomAccessFileDemo {
         try {
             raf = new RandomAccessFile(filePath, "rw");
             for (int i = 0; i < 10; i++) {
-                // Ð´ÈëIntÐÍÊý¾Ý
+                // å†™å…¥Intåž‹æ•°æ®
                 raf.writeInt(i);
             }
             raf.close();
             raf = new RandomAccessFile(filePath, "rw");
-            // ½«ÎÄ¼þÖ¸ÕëÒÆµ½µÚ5¸öintÊý¾ÝºóÃæ
+            // å°†æ–‡ä»¶æŒ‡é’ˆç§»åˆ°ç¬¬5ä¸ªintæ•°æ®åŽé¢
             raf.seek(5 * Integer.SIZE / 8);
-            // ¸²¸ÇµÚ6¸öintÊý¾Ý
+            // è¦†ç›–ç¬¬6ä¸ªintæ•°æ®
             raf.writeInt(666);
             raf.close();
             raf = new RandomAccessFile(filePath, "r");
@@ -76,7 +76,7 @@ public class RandomAccessFileDemo {
         try {
             raf = new RandomAccessFile(filePath, "rw");
             FileChannel inChannel = raf.getChannel();
-            // ½«×Ö·û´®Ð´ÈëÎÄ¼þ
+            // å°†å­—ç¬¦ä¸²å†™å…¥æ–‡ä»¶
             inChannel.write(ByteBuffer.wrap("hello michael".getBytes()));
             inChannel.close();
         } catch (IOException e) {

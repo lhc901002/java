@@ -19,7 +19,7 @@ public class BlockingMessageReceiver {
             serverSocket = new ServerSocket(port);
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("accept connection from client");
+                System.out.println("Accepted connection from " + socket);
                 InputStream in = socket.getInputStream();
                 OutputStream out = socket.getOutputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));

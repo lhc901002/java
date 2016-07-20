@@ -1,5 +1,7 @@
 package org.michaelliu.java.nio.socket;
 
+import org.michaelliu.java.util.BufferUtils;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -44,6 +46,12 @@ public class NonBlockingMessageReceiver {
                         client.register(selector, SelectionKey.OP_WRITE | SelectionKey.OP_READ, ByteBuffer.allocate(100));
                     }
                     if (key.isReadable()) {
+                        SocketChannel client = (SocketChannel) key.channel();
+                        ByteBuffer output = (ByteBuffer) key.attachment();
+                        System.out.println("Server received: " + BufferUtils.getString(output));
+                        client.read(output);
+                    }
+                    if (key.isWritable()) {
                         SocketChannel client = (SocketChannel) key.channel();
                         ByteBuffer output = (ByteBuffer) key.attachment();
                         output.flip();
