@@ -12,6 +12,8 @@
     <modules>
         <module>java-thread</module>
         <module>java-nio</module>
+        <module>java-io</module>
+        <module>java-lang</module>
     </modules>
 
     <properties>
