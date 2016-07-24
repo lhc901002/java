@@ -8,7 +8,7 @@ import java.io.File;
 public class ArchiveExample {
 
     public static void main(String[] args) {
-        ArchiveUtils.addToArchive(new File("E:\\Textbooks2"), new File("E:\\Textbooks2.jar"));
+        ArchiveUtils.addToArchive(new File("E:\\Textbooks2"), new File("E:\\Textbooks2.cpio"));
     }
 
 }

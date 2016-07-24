@@ -4,6 +4,8 @@ import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
+import org.apache.commons.compress.archivers.ar.ArArchiveEntry;
+import org.apache.commons.compress.archivers.cpio.CpioArchiveEntry;
 import org.apache.commons.compress.archivers.jar.JarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
@@ -67,6 +69,11 @@ public class ArchiveUtils {
                 } else if (extension.equals(ArchiveStreamFactory.JAR)) {
                     entry = new JarArchiveEntry(fileName);
                     ((JarArchiveEntry) entry).setSize(file.length());
+                } else if (extension.equals(ArchiveStreamFactory.AR)) {
+                    // if entry includes file with its name longer than 16 characters, it will throw IOException.
+                    entry = new ArArchiveEntry(fileName, file.length());
+                } else if (extension.equals(ArchiveStreamFactory.CPIO)) {
+                    entry = new CpioArchiveEntry(fileName, file.length());
                 } else {
                     throw new IllegalArgumentException("File extension is not an archive type!");
                 }

@@ -9,10 +9,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>java-thread</artifactId>
-
-    <dependencies>
-
-    </dependencies>
+    <artifactId>java-designpattern</artifactId>
 
 </project>

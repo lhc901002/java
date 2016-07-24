@@ -14,6 +14,7 @@
         <module>java-nio</module>
         <module>java-io</module>
         <module>java-lang</module>
+        <module>java-designpattern</module>
     </modules>
 
     <dependencies>
@@ -27,6 +28,13 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
