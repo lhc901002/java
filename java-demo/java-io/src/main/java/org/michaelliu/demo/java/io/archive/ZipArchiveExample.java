@@ -1,5 +1,6 @@
 package org.michaelliu.demo.java.io.archive;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
@@ -14,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -144,7 +144,7 @@ public class ZipArchiveExample {
 
     public static void main(String[] args) throws IOException {
         Collection<File> files = FileUtils.listFiles(new File("/home/documents"), null, true);
-        List<File> fileList = new ArrayList<File>();
+        List<File> fileList = Lists.newArrayList();
         fileList.addAll(files);
         new ZipArchiveExample().addToZip(fileList, new File("/home/documents"));
     }
