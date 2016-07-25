@@ -4,7 +4,9 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.KryoException;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import org.michaelliu.demo.java.io.vo.Student;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.michaelliu.demo.java.beans.Student;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
 import java.io.FileInputStream;
@@ -16,6 +18,8 @@ import java.io.IOException;
  * Created by Michael on 7/4/16.
  */
 public class SerializeByKryo {
+
+    private static Log log = LogFactory.getLog(SerializeByKryo.class);
 
     private static Kryo initKryo() {
         Kryo kryo = new Kryo();
@@ -39,7 +43,7 @@ public class SerializeByKryo {
         Input input = new Input(new FileInputStream("student.out"));
         Student student = null;
         while((student = kryo.readObject(input, Student.class)) != null){
-            //System.out.println(student);
+            //log.info(student);
         }
         input.close();
     }
@@ -49,13 +53,11 @@ public class SerializeByKryo {
         long start = System.currentTimeMillis();
         setSerializableObject(kryo);
         long end = System.currentTimeMillis();
-        System.out.println("Kryo Serializable writeObject time: " +
-                (end - start) + "ms");
+        log.info("Kryo Serializable writeObject time: " + (end - start) + "ms");
         start = System.currentTimeMillis();
         getSerializableObject(kryo);
         end = System.currentTimeMillis();
-        System.out.println("Kryo Serializable readObject time: " +
-                (end - start) + "ms");
+        log.info("Kryo Serializable readObject time: " + (end - start) + "ms");
     }
 
 }

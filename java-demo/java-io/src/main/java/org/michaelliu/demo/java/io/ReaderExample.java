@@ -1,5 +1,8 @@
 package org.michaelliu.demo.java.io;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -18,6 +21,8 @@ import java.io.Writer;
  */
 public class ReaderExample {
 
+    private static Log log = LogFactory.getLog(ReaderExample.class);
+
     public void copyFileByBufferedReader(String srcFile, String destFile) {
         Reader br = null;
         Writer bw = null;
@@ -30,11 +35,11 @@ public class ReaderExample {
             int read = -1;
             while ((read = br.read(cbuf)) != -1) {
                 bw.write(cbuf, 0, read);
-                System.out.println("Char Buf: " + new String(cbuf));
-                System.out.println("Read: " + read + " characters");
+                log.info("Char Buf: " + new String(cbuf));
+                log.info("Read: " + read + " characters");
             }
         } catch (IOException e) {
-            System.err.println(e);
+            log.error(e);
         } finally {
             try {
                 if (bw != null) {
@@ -44,7 +49,7 @@ public class ReaderExample {
                     br.close();
                 }
             } catch (IOException e) {
-                System.err.println(e);
+                log.error(e);
             }
         }
     }

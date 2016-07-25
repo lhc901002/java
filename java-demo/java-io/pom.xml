@@ -8,10 +8,15 @@
         <groupId>org.michaelliu.demo</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
     <artifactId>java-io</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.michaelliu.demo</groupId>
+            <artifactId>java-beans</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
         <dependency>
             <groupId>org.apache.commons</groupId>

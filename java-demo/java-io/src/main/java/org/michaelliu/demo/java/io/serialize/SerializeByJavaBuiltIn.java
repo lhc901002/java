@@ -1,6 +1,8 @@
 package org.michaelliu.demo.java.io.serialize;
 
-import org.michaelliu.demo.java.io.vo.Student;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.michaelliu.demo.java.beans.Student;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +15,8 @@ import java.io.ObjectOutputStream;
  * Created by Michael on 7/4/16.
  */
 public class SerializeByJavaBuiltIn {
+
+    private static Log log = LogFactory.getLog(SerializeByJavaBuiltIn.class);
 
     /**
      * 序列化一个对象(存储到一个文件)
@@ -36,7 +40,7 @@ public class SerializeByJavaBuiltIn {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("student.out"));
         Student student = null;
         while((student = (Student)ois.readObject()) != null){
-            //System.out.println(student);
+            //log.info(student);
         }
         ois.close();
     }
@@ -46,14 +50,12 @@ public class SerializeByJavaBuiltIn {
         long start = System.currentTimeMillis();
         setSerializableObject();
         long end = System.currentTimeMillis();
-        System.out.println("Java Serializable writeObject time: " +
-                (end - start) + "ms");
+        log.info("Java Serializable writeObject time: " + (end - start) + "ms");
 
         start = System.currentTimeMillis();
         getSerializableObject();
         end = System.currentTimeMillis();
-        System.out.println("Java Serializable readObject time: " +
-                (end - start) + "ms");
+        log.info("Java Serializable readObject time: " + (end - start) + "ms");
 
 //        //序列化一个对象(存储到字节数组)
 //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -66,7 +68,7 @@ public class SerializeByJavaBuiltIn {
 //        ObjectInputStream ois2 = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));
 //        str = (String)ois2.readObject();
 //        student = (Student)ois2.readObject();
-//        System.out.println(str + student);
+//        log.info(str + student);
     }
 
 }

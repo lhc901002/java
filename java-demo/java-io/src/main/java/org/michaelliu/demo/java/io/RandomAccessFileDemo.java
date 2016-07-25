@@ -1,5 +1,8 @@
 package org.michaelliu.demo.java.io;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -9,6 +12,8 @@ import java.nio.channels.FileChannel;
  * Created by Michael on 2016/7/19.
  */
 public class RandomAccessFileDemo {
+
+    private static Log log = LogFactory.getLog(RandomAccessFileDemo.class);
 
     public void writeRandomAccessFile(String filePath) {
         RandomAccessFile raf = null;
@@ -27,18 +32,18 @@ public class RandomAccessFileDemo {
             raf.close();
             raf = new RandomAccessFile(filePath, "r");
             for (int i = 0; i < 10; i++) {
-                System.out.println("Value " + i + ": " + raf.readInt());
+                log.info("Value " + i + ": " + raf.readInt());
             }
             raf.close();
         } catch (IOException e) {
-            System.err.println(e);
+            log.error(e);
         } finally {
             try {
                 if (raf != null) {
                     raf.close();
                 }
             } catch (IOException e) {
-                System.err.println(e);
+                log.error(e);
             }
         }
     }
@@ -59,14 +64,14 @@ public class RandomAccessFileDemo {
                 buf.clear();
             }
         } catch (IOException e) {
-            System.err.println(e);
+            log.error(e);
         } finally {
             try {
                 if (raf != null) {
                     raf.close();
                 }
             } catch (IOException e) {
-                System.err.println(e);
+                log.error(e);
             }
         }
     }
@@ -80,14 +85,14 @@ public class RandomAccessFileDemo {
             inChannel.write(ByteBuffer.wrap("hello michael".getBytes()));
             inChannel.close();
         } catch (IOException e) {
-            System.err.println(e);
+            log.error(e);
         } finally {
             try {
                 if (raf != null) {
                     raf.close();
                 }
             } catch (IOException e) {
-                System.err.println(e);
+                log.error(e);
             }
         }
     }

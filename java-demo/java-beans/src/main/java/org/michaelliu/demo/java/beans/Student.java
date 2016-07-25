@@ -1,4 +1,4 @@
-package org.michaelliu.demo.java.io.vo;
+package org.michaelliu.demo.java.beans;
 
 import java.io.Serializable;
 

@@ -1,5 +1,8 @@
 package org.michaelliu.demo.java.io;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -16,6 +19,8 @@ import java.io.OutputStream;
  */
 public class InputStreamExample {
 
+    private static Log log = LogFactory.getLog(InputStreamExample.class);
+
     public void readFileByBufferedInputStream(String fileName, byte[] buffer) {
        InputStream bis = null;
         try {
@@ -25,13 +30,13 @@ public class InputStreamExample {
                 read = bis.read(buffer, 0, buffer.length);
             } while (read != -1);
         } catch (IOException e) {
-            System.err.println(e);
+            log.error(e);
         } finally {
             if (bis != null) {
                 try {
                     bis.close();
                 } catch (IOException e) {
-                    System.err.println(e);
+                    log.error(e);
                 }
             }
         }
@@ -43,13 +48,13 @@ public class InputStreamExample {
             bos = new BufferedOutputStream(new FileOutputStream(fileName));
             bos.write(buffer, 0, buffer.length);
         } catch (IOException e) {
-            System.err.println(e);
+            log.error(e);
         } finally {
             if (bos != null) {
                 try {
                     bos.close();
                 } catch (IOException e) {
-                    System.err.println(e);
+                    log.error(e);
                 }
             }
         }
@@ -65,12 +70,12 @@ public class InputStreamExample {
                 byte[] buffer = new byte[4096];
                 int read = -1;
                 while ((read = bis.read(buffer)) != -1) {
-                    System.out.println("Read: " + read + " bytes");
+                    log.info("Read: " + read + " bytes");
                     bos.write(buffer, 0, read);
                 }
             }
         } catch (IOException e) {
-            System.err.println(e);
+            log.error(e);
         } finally {
             try {
                 if (bos != null) {
@@ -80,7 +85,7 @@ public class InputStreamExample {
                     bis.close();
                 }
             } catch (IOException e) {
-                System.err.println(e);
+                log.error(e);
             }
         }
     }
