@@ -1,16 +1,11 @@
 package org.michaelliu.demo.java.thread;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.util.HashMap;
 
 /**
  * Created by Michael on 2016/7/17.
  */
 public class SynchronizedSafeWordCountThread extends AbstractWordCountThread {
-
-    private static Log log = LogFactory.getLog(SynchronizedSafeWordCountThread.class);
 
     private static HashMap<String, Long> wordCountMap;
 

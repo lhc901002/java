@@ -3,9 +3,9 @@ package org.michaelliu.demo.java.thread;
 import java.util.HashMap;
 
 /**
- * Created by Michael on 2016/7/17.
+ * Created by Michael on 7/25/16.
  */
-public class UnsafeWordCountThead extends AbstractWordCountThread {
+public class SynchronizedUnsafeWordCountThread extends AbstractWordCountThread {
 
     private static HashMap<String, Long> wordCountMap;
 
@@ -13,14 +13,15 @@ public class UnsafeWordCountThead extends AbstractWordCountThread {
         wordCountMap = new HashMap<>();
     }
 
-    public UnsafeWordCountThead() {}
+    public SynchronizedUnsafeWordCountThread() {
+    }
 
-    public UnsafeWordCountThead(String word) {
+    public SynchronizedUnsafeWordCountThread(String word) {
         super(word);
     }
 
     @Override
-    protected Long increase(String word) {
+    protected synchronized Long increase(String word) {
         Long oldValue = wordCountMap.get(word);
         Long newValue = (oldValue == null) ? 1L : oldValue + 1;
         wordCountMap.put(word, newValue);

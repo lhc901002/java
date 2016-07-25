@@ -6,7 +6,6 @@ import com.google.common.util.concurrent.MoreExecutors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.michaelliu.demo.java.thread.AbstractWordCountThread;
-import org.michaelliu.demo.java.thread.SynchronizedSafeWordCountThread;
 import org.michaelliu.demo.java.thread.WordCountThreadFactory;
 
 import java.util.concurrent.ExecutorService;
@@ -32,7 +31,7 @@ public class WordCountTaskExecutor {
         ListeningExecutorService executorService = MoreExecutors.listeningDecorator(executor);
         for (int i = 0; i < threadSize; i++) {
             AbstractWordCountThread wordCountThread = WordCountThreadFactory.createThread(threadType);
-            final ListenableFuture<Long> listenableFuture = executorService.submit(new SynchronizedSafeWordCountThread(word));
+            final ListenableFuture<Long> listenableFuture = executorService.submit(wordCountThread);
             listenableFuture.addListener(new Runnable() {
                 @Override
                 public void run() {
@@ -60,7 +59,7 @@ public class WordCountTaskExecutor {
         execute("UnsafeWordCountThead");
         execute("AtomicSafeWordCountThread");
         execute("SynchronizedSafeWordCountThread");
-
+        execute("SynchronizedUnsafeWordCountThread");
     }
 
 }

@@ -13,6 +13,8 @@ public class WordCountThreadFactory {
             wordCountThread = new AtomicSafeWordCountThread();
         } else if (type.equals("SynchronizedSafeWordCountThread")) {
             wordCountThread = new SynchronizedSafeWordCountThread();
+        } else if (type.equals("SynchronizedUnsafeWordCountThread")) {
+            wordCountThread = new SynchronizedUnsafeWordCountThread();
         }
         return wordCountThread;
     }
