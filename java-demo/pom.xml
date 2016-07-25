@@ -15,6 +15,7 @@
         <module>java-lang</module>
         <module>java-designpattern</module>
         <module>java-beans</module>
+        <module>java-web</module>
     </modules>
 
     <properties>
