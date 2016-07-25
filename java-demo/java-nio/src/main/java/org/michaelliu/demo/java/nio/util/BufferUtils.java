@@ -27,9 +27,8 @@ public class BufferUtils {
         }
         try {
             CharsetDecoder decoder = Charset.forName(charset).newDecoder();
-            //用这个的话，只能输出来一次结果，第二次显示为空
-            // charBuffer = decoder.decode(buffer);
-            CharBuffer charBuffer = decoder.decode(buffer.asReadOnlyBuffer());
+            CharBuffer charBuffer = decoder.decode(buffer);
+            buffer.flip();
             return charBuffer.toString();
         } catch (CharacterCodingException e) {
             e.printStackTrace();
