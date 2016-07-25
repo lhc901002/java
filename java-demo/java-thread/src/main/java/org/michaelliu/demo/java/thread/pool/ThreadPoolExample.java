@@ -1,9 +1,10 @@
-package org.michaelliu.demo.java.thread;
+package org.michaelliu.demo.java.thread.pool;
 
 import com.google.common.collect.Lists;
 import javafx.util.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.michaelliu.demo.java.thread.CountThread;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

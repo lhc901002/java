@@ -11,9 +11,9 @@ import java.nio.channels.FileChannel;
 /**
  * Created by Michael on 2016/7/19.
  */
-public class RandomAccessFileDemo {
+public class RandomAccessFileExample {
 
-    private static Log log = LogFactory.getLog(RandomAccessFileDemo.class);
+    private static Log log = LogFactory.getLog(RandomAccessFileExample.class);
 
     public void writeRandomAccessFile(String filePath) {
         RandomAccessFile raf = null;
@@ -56,7 +56,7 @@ public class RandomAccessFileDemo {
             ByteBuffer buf = ByteBuffer.allocate(32);
             int bytesRead;
             while ((bytesRead = inChannel.read(buf)) != -1) {
-//                System.out.println("Read " + bytesRead + "Bs");
+//                log.info("Read " + bytesRead + "Bs");
                 buf.flip();
                 while (buf.hasRemaining()) {
                     System.out.print((char) buf.get());
@@ -98,9 +98,9 @@ public class RandomAccessFileDemo {
     }
 
     public static void main(String[] args) throws IOException {
-//        new RandomAccessFileDemo().writeRandomAccessFile("test.txt");
-//        new RandomAccessFileDemo().readFromFileChannel("test.txt");
-        new RandomAccessFileDemo().writeIntoFileChannel("test.txt");
+//        new RandomAccessFileExample().writeRandomAccessFile("test.txt");
+//        new RandomAccessFileExample().readFromFileChannel("test.txt");
+        new RandomAccessFileExample().writeIntoFileChannel("test.txt");
     }
 
 }
