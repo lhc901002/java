@@ -53,7 +53,9 @@ public class FileWriteTaskExecutor {
             }, executorService);
         }
         while (finishedSize.get() != taskList.size()) {}
-        executorService.shutdown();
+        if (!executorService.isShutdown()) {
+            executorService.shutdown();
+        }
         log.info("Task finished with " + exceptionSize + " exceptions.");
     }
 

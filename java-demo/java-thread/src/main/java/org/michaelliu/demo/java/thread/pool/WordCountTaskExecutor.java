@@ -51,7 +51,9 @@ public class WordCountTaskExecutor {
             }, executorService);
         }
         while (finishedSize.get() != threadSize) {}
-        executorService.shutdown();
+        if (!executorService.isShutdown()) {
+            executorService.shutdown();
+        }
         log.info("Counter has increased to " + maxCounter);
     }
 

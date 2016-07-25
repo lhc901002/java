@@ -17,10 +17,12 @@
         <module>java-beans</module>
         <module>java-web</module>
         <module>java-data</module>
+        <module>java-commons</module>
     </modules>
 
     <properties>
         <guava.version>19.0</guava.version>
+        <commons.lang3.version>3.4</commons.lang3.version>
         <logging.version>1.2</logging.version>
         <junit.version>3.8.1</junit.version>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -32,6 +34,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
         </dependency>
 
         <dependency>

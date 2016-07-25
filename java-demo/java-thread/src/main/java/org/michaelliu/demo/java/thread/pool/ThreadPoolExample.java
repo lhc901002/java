@@ -37,7 +37,9 @@ public class ThreadPoolExample {
             Future<Pair<CountThread, Long>> result = executor.submit(thread);
             resultList.add(result);
         }
-        executor.shutdown();
+        if (!executor.isShutdown()) {
+            executor.shutdown();
+        }
         printThreadResult(resultList);
     }
 

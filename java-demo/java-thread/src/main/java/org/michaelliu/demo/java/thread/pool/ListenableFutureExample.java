@@ -65,7 +65,9 @@ public class ListenableFutureExample {
                 }
             }); */
         }
-        executor.shutdown();
+        if (!executorService.isShutdown()) {
+            executorService.shutdown();
+        }
     }
 
     public static void main(String[] args) {

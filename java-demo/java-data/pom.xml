@@ -10,8 +10,31 @@
     </parent>
     <artifactId>java-data</artifactId>
 
+    <properties>
+        <mysql.version>5.1.39</mysql.version>
+        <dbcp.version>1.4</dbcp.version>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.michaelliu.demo</groupId>
+            <artifactId>java-lang</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
-    <dependencies></dependencies>
+        <!-- JDBC连接 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!-- 数据库连接池dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${dbcp.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
