@@ -6,30 +6,30 @@ import com.google.common.util.concurrent.MoreExecutors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.michaelliu.demo.java.thread.AbstractWordCountThread;
-import org.michaelliu.demo.java.thread.WordCountThreadFactory;
+import org.michaelliu.demo.java.thread.WordCountDownLatchThread;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by Michael on 7/25/16.
+ * Created by michael on 2016/8/1.
  */
-public class WordCountTaskExecutor {
+public class WordCountDownLatchExecutor {
 
-    private static Log log = LogFactory.getLog(WordCountTaskExecutor.class);
-
-    private static AtomicLong finishedSize = new AtomicLong(0);
+    private static Log log = LogFactory.getLog(WordCountDownLatchExecutor.class);
 
     private static volatile Long maxCounter = -1l;
 
-    private static void execute(String threadType) {
+    private static void execute() {
         int poolSize = 2000;
         int threadSize = 10000;
+        CyclicBarrier barrier = new CyclicBarrier(threadSize);
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
         ListeningExecutorService executorService = MoreExecutors.listeningDecorator(executor);
         for (int i = 0; i < threadSize; i++) {
-            AbstractWordCountThread wordCountThread = WordCountThreadFactory.createThread(threadType);
+            CyclicBarrier wordCountThread = new WordCountDownLatchThread("michael", barrier);
             final ListenableFuture<Long> listenableFuture = executorService.submit(wordCountThread);
             listenableFuture.addListener(new Runnable() {
                 @Override
@@ -41,26 +41,23 @@ public class WordCountTaskExecutor {
                         log.info("Thread returns counter: " + counter);
                     } catch (Exception e) {
                         log.error(e);
-                    } finally {
-                        if (listenableFuture.isDone()) {
-                            finishedSize.incrementAndGet();
-                        }
                     }
                 }
             }, executorService);
         }
-        while (finishedSize.get() != threadSize) {}
+        try {
+            barrier.wait();
+        } catch (InterruptedException e) {
+            log.error(e);
+        }
         if (!executorService.isShutdown()) {
-            executorService.shutdown();
+            executorService.shutdownNow();
         }
         log.info("Counter has increased to " + maxCounter);
     }
 
     public static void main(String[] args) {
-//        execute("UnsafeWordCountThead");
-//        execute("AtomicSafeWordCountThread");
-        execute("SynchronizedSafeWordCountThread");
-//        execute("SynchronizedUnsafeWordCountThread");
+        execute();
     }
 
 }
