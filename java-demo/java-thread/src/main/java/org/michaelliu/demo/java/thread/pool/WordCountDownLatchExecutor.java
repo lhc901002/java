@@ -5,10 +5,8 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.michaelliu.demo.java.thread.AbstractWordCountThread;
 import org.michaelliu.demo.java.thread.WordCountDownLatchThread;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,7 +27,7 @@ public class WordCountDownLatchExecutor {
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
         ListeningExecutorService executorService = MoreExecutors.listeningDecorator(executor);
         for (int i = 0; i < threadSize; i++) {
-            CyclicBarrier wordCountThread = new WordCountDownLatchThread("michael", barrier);
+            WordCountDownLatchThread wordCountThread = new WordCountDownLatchThread("michael", barrier);
             final ListenableFuture<Long> listenableFuture = executorService.submit(wordCountThread);
             listenableFuture.addListener(new Runnable() {
                 @Override
