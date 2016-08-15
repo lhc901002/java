@@ -7,12 +7,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 /**
  * Created by Michael on 8/15/16.
  */
-public class EchoClient {
+public class TimeoutClient {
 
     private String host;
 
@@ -20,8 +22,16 @@ public class EchoClient {
 
     private Socket socket;
 
-    public EchoClient(String host, int port) throws IOException {
-        socket = new Socket(host, port);
+    /**
+     * set time out seconds in the constructor
+     * @param host
+     * @param port
+     * @throws IOException
+     */
+    public TimeoutClient(String host, int port) throws IOException {
+        socket = new Socket();
+        SocketAddress endpoint = new InetSocketAddress(host, port);
+        socket.connect(endpoint, 100000);
     }
 
     private PrintWriter getWriter(Socket socket) throws IOException {
@@ -37,9 +47,9 @@ public class EchoClient {
     public void connect() throws IOException {
         try {
             PrintWriter writer = getWriter(socket);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
-            String message;
-            while ((message = bufferedReader.readLine()) != null) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
+            String message = null;
+            while ((message = reader.readLine()) != null) {
                 System.out.println("Client sends: " + message);
                 writer.println(message);
                 if (message.equals("exit")) {
@@ -61,7 +71,7 @@ public class EchoClient {
 
     public static void main(String[] args) {
         try {
-            new EchoClient("127.0.0.1", 8000).connect();
+            new TimeoutClient("127.0.0.1", 8001).connect();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -12,7 +12,7 @@ import java.net.Socket;
 /**
  * Created by Michael on 8/15/16.
  */
-public class EchoClient {
+public class EchoClient2 {
 
     private String host;
 
@@ -20,7 +20,7 @@ public class EchoClient {
 
     private Socket socket;
 
-    public EchoClient(String host, int port) throws IOException {
+    public EchoClient2(String host, int port) throws IOException {
         socket = new Socket(host, port);
     }
 
@@ -36,12 +36,14 @@ public class EchoClient {
 
     public void connect() throws IOException {
         try {
-            PrintWriter writer = getWriter(socket);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
-            String message;
-            while ((message = bufferedReader.readLine()) != null) {
+            OutputStream output = socket.getOutputStream();
+            FileInputStream fis = new FileInputStream("input.txt");
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = fis.read(buffer)) != -1) {
+                String message = new String(buffer, "UTF-8");
                 System.out.println("Client sends: " + message);
-                writer.println(message);
+                output.write(buffer);
                 if (message.equals("exit")) {
                     break;
                 }
