@@ -1,11 +1,8 @@
 package com.michaelliu.demo.java.server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -15,26 +12,12 @@ import java.net.Socket;
  */
 public class EchoServer2 {
 
-    private int port;
-
     private ServerSocket serverSocket;
 
     public EchoServer2(int port) throws IOException {
-        this.port = port;
         serverSocket = new ServerSocket(port);
         System.out.println("Server started!");
     }
-
-    private PrintWriter getWriter(Socket socket) throws IOException {
-        OutputStream output = socket.getOutputStream();
-        return new PrintWriter(output, true);
-    }
-
-    private BufferedReader getReader(Socket socket) throws IOException {
-        InputStream input = socket.getInputStream();
-        return new BufferedReader(new InputStreamReader(input));
-    }
-
 
     /**
      * This code might throw java.net.SocketException: Connection reset
@@ -50,13 +33,8 @@ public class EchoServer2 {
                 byte[] buffer = new byte[1024];
                 int read;
                 while ((read = input.read(buffer, 0, buffer.length)) != -1) {
-                    String message = new String(buffer, "UTF-8");
                     output.write(buffer, 0, read);
-                    output.flush();
-                    System.out.println("Server receives: " + message);
-                    if (message.equals("exit")) {
-                        break;
-                    }
+                    System.out.println("Server receives: " + new String(buffer, "UTF-8"));
                 }
             } catch (IOException e) {
                 e.printStackTrace();

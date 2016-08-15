@@ -16,22 +16,21 @@ import java.net.SocketAddress;
  */
 public class TimeoutClient {
 
-    private String host;
-
-    private int port;
-
     private Socket socket;
 
     /**
-     * set time out seconds in the constructor
+     * set time out seconds in the constructor, show time cost on connection.
      * @param host
      * @param port
      * @throws IOException
      */
     public TimeoutClient(String host, int port) throws IOException {
+        long begin = System.currentTimeMillis();
         socket = new Socket();
         SocketAddress endpoint = new InetSocketAddress(host, port);
-        socket.connect(endpoint, 100000);
+        socket.connect(endpoint, 5000);
+        long end = System.currentTimeMillis();
+        System.out.println("Connection costs: " + (end - begin) + " ms");
     }
 
     private PrintWriter getWriter(Socket socket) throws IOException {
@@ -71,7 +70,7 @@ public class TimeoutClient {
 
     public static void main(String[] args) {
         try {
-            new TimeoutClient("127.0.0.1", 8001).connect();
+            new TimeoutClient("127.0.0.1", 8000).connect();
         } catch (IOException e) {
             e.printStackTrace();
         }

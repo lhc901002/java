@@ -14,10 +14,6 @@ import java.net.Socket;
  */
 public class EchoClient {
 
-    private String host;
-
-    private int port;
-
     private Socket socket;
 
     public EchoClient(String host, int port) throws IOException {

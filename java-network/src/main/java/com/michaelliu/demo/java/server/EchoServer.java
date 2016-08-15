@@ -14,12 +14,9 @@ import java.net.Socket;
  */
 public class EchoServer {
 
-    private int port;
-
     private ServerSocket serverSocket;
 
     public EchoServer(int port) throws IOException {
-        this.port = port;
         serverSocket = new ServerSocket(port);
         System.out.println("Server started!");
     }
@@ -42,7 +39,7 @@ public class EchoServer {
                 System.out.println("Connnected to server, client ip: " + socket.getInetAddress() + ":" + socket.getPort());
                 BufferedReader reader = getReader(socket);
                 PrintWriter writer = getWriter(socket);
-                String message = null;
+                String message;
                 while ((message = reader.readLine()) != null) {
                     System.out.println("Server receives: " + message);
                     writer.println("Echo " + message);
