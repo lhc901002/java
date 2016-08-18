@@ -8,37 +8,53 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
- * Created by Michael on 8/15/16.
+ * Created by Michael on 8/18/16.
  */
-public class EchoServer {
+public class EchoServer3 {
 
     private ServerSocket serverSocket;
 
-    public EchoServer(int port) throws IOException {
+    private ExecutorService executor;
+
+    public EchoServer3(int port, int nThreads) throws IOException {
         serverSocket = new ServerSocket(port);
+        executor = Executors.newFixedThreadPool(nThreads);
         System.out.println("Server started!");
     }
 
-    private PrintWriter getWriter(Socket socket) throws IOException {
-        OutputStream output = socket.getOutputStream();
-        return new PrintWriter(output, true);
-    }
-
-    private BufferedReader getReader(Socket socket) throws IOException {
-        InputStream input = socket.getInputStream();
-        return new BufferedReader(new InputStreamReader(input));
-    }
-
     /**
-     * char stream
+     * multithread service
      */
     public void service() {
         while (true) {
-            Socket socket = null;
+            Socket socket;
             try {
                 socket = serverSocket.accept();
+                executor.execute(new EchoServerHandler(socket));
+                // Normal start!
+//                Thread thread = new Thread(new EchoServerHandler(socket));
+//                thread.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class EchoServerHandler implements Runnable {
+
+        private Socket socket;
+
+        public EchoServerHandler(Socket socket) {
+            this.socket = socket;
+        }
+
+        @Override
+        public void run() {
+            try {
                 System.out.println("Connnected to server, client ip: " + socket.getInetAddress() + ":" + socket.getPort());
                 BufferedReader reader = getReader(socket);
                 PrintWriter writer = getWriter(socket);
@@ -62,11 +78,22 @@ public class EchoServer {
                 }
             }
         }
+
+        private PrintWriter getWriter(Socket socket) throws IOException {
+            OutputStream output = socket.getOutputStream();
+            return new PrintWriter(output, true);
+        }
+
+        private BufferedReader getReader(Socket socket) throws IOException {
+            InputStream input = socket.getInputStream();
+            return new BufferedReader(new InputStreamReader(input));
+        }
+
     }
 
     public static void main(String[] args) {
         try {
-            new EchoServer(8000).service();
+            new EchoServer3(8000, 3).service();
         } catch (IOException e) {
             e.printStackTrace();
         }

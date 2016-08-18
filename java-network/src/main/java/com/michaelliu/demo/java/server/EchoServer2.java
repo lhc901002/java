@@ -21,6 +21,7 @@ public class EchoServer2 {
 
     /**
      * This code might throw java.net.SocketException: Connection reset
+     * byte stream
      */
     public void service() {
         while (true) {
