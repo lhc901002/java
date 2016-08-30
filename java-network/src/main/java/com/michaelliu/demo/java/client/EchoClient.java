@@ -30,6 +30,9 @@ public class EchoClient {
         return new BufferedReader(new InputStreamReader(input));
     }
 
+    /**
+     * This socket sends messages using character stream
+     */
     public void connect() throws IOException {
         try {
             PrintWriter writer = getWriter(socket);

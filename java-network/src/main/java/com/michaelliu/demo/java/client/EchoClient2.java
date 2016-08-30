@@ -16,6 +16,9 @@ public class EchoClient2 {
         socket = new Socket(host, port);
     }
 
+    /**
+     * This socket sends messages using byte stream
+     */
     public void connect() throws IOException {
         try {
             OutputStream output = socket.getOutputStream();
