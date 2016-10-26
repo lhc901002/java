@@ -18,6 +18,7 @@
         <module>java-web</module>
         <module>java-data</module>
         <module>java-commons</module>
+        <module>java-json</module>
     </modules>
 
     <properties>
