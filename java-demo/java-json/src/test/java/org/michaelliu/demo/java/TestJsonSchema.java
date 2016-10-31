@@ -1,4 +1,4 @@
-package org.michaelliu.demo.java.json;
+package org.michaelliu.demo.java;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.reinert.jjschema.v1.JsonSchemaFactory;
