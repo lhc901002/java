@@ -1,5 +1,7 @@
 package org.michaelliu.demo.java.beans;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -15,15 +17,18 @@ public class Student implements Serializable {
 
     private Integer age;
 
+    private Integer gender;
+
     private String department;
 
     public Student() {
     }
 
-    public Student(Integer id, String name, Integer age, String department) {
+    public Student(Integer id, String name, Integer age, Integer gender, String department) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.gender = gender;
         this.department = department;
     }
 
@@ -51,6 +56,14 @@ public class Student implements Serializable {
         this.age = age;
     }
 
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
+
     public String getDepartment() {
         return department;
     }
@@ -61,12 +74,13 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", department='" + department + '\'' +
-                '}';
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("age", age)
+                .append("gender", gender)
+                .append("department", department)
+                .toString();
     }
 
 }
