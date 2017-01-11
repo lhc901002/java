@@ -140,7 +140,7 @@ public class BasicSort {
         int[] array = {3, 2, 1};
         int[] array2 = {1, 2, 3, 4, 5, 6};
         int[] array3 = {4, 5, 1, 6, 3, 2};
-        heapSort(array);
+        heapSort2(array);
 //        heapSort2(array2);
 //        heapSort2(array3);
         printArray(array);
