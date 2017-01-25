@@ -120,30 +120,108 @@ public class StringQuestion {
         return 0;
     }
 
-    public static void main(String[] args) {
-        printNBitsString(new int[4], 4);
-//        StringBuffer s1 = new StringBuffer("hello world");
-//        StringBuffer s2 = new StringBuffer("");
-//        StringBuffer s3 = new StringBuffer("a");
-//        StringBuffer s4 = new StringBuffer("aaaaaaa");
-//        StringBuffer s5 = new StringBuffer("ababab");
-//        removeDuplicate(s1);
-//        removeDuplicate(s2);
-//        removeDuplicate(s3);
-//        removeDuplicate(s4);
-//        removeDuplicate(s5);
-//        System.out.println(s1);
-//        System.out.println(s2);
-//        System.out.println(s3);
-//        System.out.println(s4);
-//        System.out.println(s5);
-//        String s = "i am hawstein";
-//        System.out.println(replaceSpaces("i am michael"));  // i%20am%20michael
-//        System.out.println(replaceSpaces("michael"));       // michael
+    public static String longestCommonPrefix(String[] strs) {
+        if (strs == null) {
+            return null;
+        }
+        int prefixLength = 0;  // length of longest common prefix
+        for (int i = 0; i < strs[0].length(); i++) {
+            for (int j = 1; j < strs.length; j++) {
+                if (strs[j].length() == prefixLength || strs[0].charAt(i) != strs[j].charAt(i)) {
+                    return strs[0].substring(0, prefixLength);
+                }
+            }
+            prefixLength++;
+        }
+        return strs[0].substring(0, prefixLength);
+    }
 
-//        String s = "ssssuuuummmmmmiiiittttttttttttt";
-//        System.out.println(compressString(s));
-//        s = "Jaain";
-//        System.out.println(compressString(s));
+    public static String longestCommonPrefix2(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        int prefixLength = strs[0].length();  // length of longest common prefix
+        for (int i = 1; i < strs.length; i++) {
+            // compare strs[0] to strs[i] and get the size of longest common prefix of both strings
+            int size = Math.min(prefixLength, strs[i].length());
+            int j;
+            for (j = 0; j < size; j++) {
+                if (strs[0].charAt(j) != strs[i].charAt(j)) {
+                    break;
+                }
+            }
+            if (j < prefixLength) {
+                prefixLength = j;
+            }
+        }
+        return strs[0].substring(0, prefixLength);
+    }
+
+    public static int strStr(String haystack, String needle) {
+        if (haystack == null || haystack.length() == 0
+                || needle == null || needle.length() == 0
+                || haystack.length() < needle.length()) {
+            return -1;
+        }
+        int start = -1;
+        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+            if (haystack.charAt(i) == needle.charAt(0)) {
+                start = i;
+                for (int j = 0; j < needle.length(); j++) {
+                    if (haystack.charAt(start + j) != needle.charAt(j)) {
+                        start = -1;
+                        break;
+                    }
+                }
+                if (start != -1) {
+                    break;
+                }
+            }
+        }
+        return start;
+    }
+
+    public static int strStr2(String haystack, String needle) {
+        if (haystack == null || haystack.length() == 0
+                || needle == null || needle.length() == 0
+                || haystack.length() < needle.length()) {
+            return -1;
+        }
+        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+            boolean isMatch = true;
+            for (int j = 0; j < needle.length(); j++) {
+                if (haystack.charAt(i + j) != needle.charAt(j)) {
+                    isMatch = false;
+                    break;
+                }
+            }
+            if (isMatch) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int lengthOfLastWord(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int length = 0, end = s.length() - 1;
+        // trim empty space at the end of string
+        while (s.charAt(end) == ' ') {
+            end--;
+        }
+        for (int i = end; i >=0; i--) {
+            if (s.charAt(i) == ' ') {
+                break;
+            } else {
+                length++;
+            }
+        }
+        return length;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(lengthOfLastWord("Hello World  "));
     }
 }

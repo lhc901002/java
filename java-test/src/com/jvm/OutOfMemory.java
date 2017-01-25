@@ -14,11 +14,11 @@ public class OutOfMemory {
         List<OOMObject> list = new ArrayList<OOMObject>();
 
         while (true) {
-//            try {
-//                Thread.sleep(200);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             list.add(new OOMObject());
         }
     }

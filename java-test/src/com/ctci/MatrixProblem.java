@@ -1,5 +1,8 @@
 package com.ctci;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by baidu on 1/3/17.
  */
@@ -145,36 +148,48 @@ public class MatrixProblem {
         }
     }
 
+    public static List<Integer> spiralOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return null;
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        int left = 0, right = matrix[0].length - 1, up = 0, down = matrix.length - 1;
+        while (left <= right && up <= down) {
+            for (int i = left; i <= right; i++) {
+                list.add(matrix[up][i]);
+            }
+            up++;
+            for (int i = up; i <= down; i++) {
+                list.add(matrix[i][right]);
+            }
+            right--;
+            if (up <= down) {
+                for (int i = right; i >= left; i--) {
+                    list.add(matrix[down][i]);
+                }
+                down--;
+            }
+            if (left <= right) {
+                for (int i = down; i >= up; i--) {
+                    list.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         int[][] matrix = {
-                {1, 2, 3, 4, 5},
-                {3, 7, 8, 9, 11},
-                {5, 9, 10, 17, 18},
-                {7, 12, 15, 19, 23},
-                {9, 13, 16, 20, 25}};
-        find(matrix, 5, 5, 9);   // 4, 0
-        find(matrix, 5, 5, 12);  // 3, 1
-        find(matrix, 5, 5, 1);   // 0, 0
-        find(matrix, 5, 5, 25);  // 4, 4
-        find(matrix, 5, 5, 22);  // No such element!
-        find(matrix, 5, 5, 26);  // No such element!
-        find(matrix, 5, 5, 0);   // No such element!
-
-        int[][] matrix1 = {
-                {1, -1, 3, 4, 2},
-                {5, 6, 7, 8, 2},
-                {9, 10, 0, 12, 2},
-                {13, 14, 15, 0, -3}};
-        int[][] matrix2 = null;
-        int[][] matrix3 = {};
-        int[][] matrix4 = {{1}};
-//        printMatrix(rotateNintyDegree(matrix1));
-//        printMatrix(rotateNintyDegree(matrix2));
-//        printMatrix(rotateNintyDegree(matrix3));
-//        printMatrix(rotateNintyDegree(matrix4));
-//        printMatrix(zero2(matrix1, 4, 5), 4, 5);
-//        printMatrix(zero2(matrix2, 0, 0), 0, 0);
-//        printMatrix(zero2(matrix3, 0, 0), 0, 0);
-//        printMatrix(zero2(matrix4, 1, 1), 1, 1);
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12}};
+        int[][] matrix2 = {
+                {1, 2, 3},
+                {3, 7, 8},
+                {5, 9, 10},
+                {7, 12, 15},
+                {7, 12, 15}};
+        System.out.println(spiralOrder(matrix));
     }
 }
