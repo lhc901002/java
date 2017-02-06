@@ -7,7 +7,7 @@ public class MyLinkedList {
 
     public static void printList(ListNode head) {
         for (ListNode node = head; node != null; node = node.next) {
-            System.out.print(node.value + " ");
+            System.out.print(node.val + " ");
         }
         System.out.println();
     }

@@ -95,6 +95,13 @@ public class BinarySearchTree {
         return pred;
     }
 
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(height(root.left) + 1, height(root.right) + 1);
+    }
+
     public static void printTree(TreeNode root) {
         if (root != null) {
             System.out.print(root.val + " ");
@@ -120,7 +127,9 @@ public class BinarySearchTree {
         root = tree.insert(root, node4);
         root = tree.insert(root, node2);
 //        printTree(root);
-        TreeNode node = tree.successor(node5);
-        System.out.println(node.val);
+//        TreeNode node = tree.successor(node5);
+        int height = tree.height(root);
+        System.out.println(tree.height(root.left));
+        System.out.println(tree.height(root.right));
     }
 }
