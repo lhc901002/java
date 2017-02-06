@@ -1,4 +1,4 @@
-package org.michaelliu.algorithm.tree;
+package org.michaelliu.algorithm.tree2;
 
 /**
  * Created by Michael on 2016/6/20.

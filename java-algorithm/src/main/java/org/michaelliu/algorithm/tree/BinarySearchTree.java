@@ -1,147 +1,126 @@
 package org.michaelliu.algorithm.tree;
 
 /**
- * Created by Michael on 2016/6/20.
+ * Created by Michael on 2/6/17.
  */
-public class BinarySearchTree <E extends Comparable<E>> {
+public class BinarySearchTree {
 
-    private BinaryTreeNode<E> root;
-
-    public BinarySearchTree(BinaryTreeNode<E> root) {
-        this.root = root;
-    }
-
-    public BinarySearchTree<E> insertKey(E key) {
-        BinaryTreeNode<E> node = new BinaryTreeNode<E>(key);
-        BinaryTreeNode<E> ptr = root;
-        while (true) {
-            int compare = ptr.getKey().compareTo(node.getKey());
-            if (compare >= 0) {
-                if (ptr.getLeft() == null) {
-                    node.setParent(ptr);
-                    ptr.setLeft(node);
-                    break;
-                } else {
-                    ptr = ptr.getLeft();
-                }
-            } else {
-                if (ptr.getRight() == null) {
-                    node.setParent(ptr);
-                    ptr.setRight(node);
-                    break;
-                }
-                ptr = ptr.getRight();
-            }
-        }
-        return this;
-    }
-
-    public BinarySearchTree<E> insertNode(BinaryTreeNode<E> node) {
-        BinaryTreeNode<E> ptr = root;
-        while (true) {
-            int compare = ptr.getKey().compareTo(node.getKey());
-            if (compare >= 0) {
-                if (ptr.getLeft() == null) {
-                    node.setParent(ptr);
-                    ptr.setLeft(node);
-                    break;
-                } else {
-                    ptr = ptr.getLeft();
-                }
-            } else {
-                if (ptr.getRight() == null) {
-                    node.setParent(ptr);
-                    ptr.setRight(node);
-                    break;
-                }
-                ptr = ptr.getRight();
-            }
-        }
-        return this;
-    }
-
-    public BinaryTreeNode<E> successor(BinaryTreeNode<E> node) {
-        if (node.getRight() != null) {
-            return leftMost(node.getRight());
+    public TreeNode insert(TreeNode root, TreeNode node) {
+        if (root == null) {
+            root = node;
         } else {
-            if (node.getParent() != null && node.getParent().getLeft() == node) {
-                return node.getParent();
-            } else {
-                while(node.getParent() != null && node.getParent().getLeft() != node) {
-                    node = node.getParent();
+            TreeNode cur = root;
+            TreeNode parent = null;
+            while (cur != null) {
+                parent = cur;
+                if (node.val < cur.val) {
+                    cur = cur.left;
+                } else {
+                    cur = cur.right;
                 }
-                return node.getParent();
             }
-        }
-    }
-
-    public BinaryTreeNode<E> predecessor(BinaryTreeNode<E> node) {
-        if (node.getLeft() != null) {
-            return rightMost(node.getLeft());
-        } else if(node.getParent() != null && node.getParent().getRight() == node) {
-            return node.getParent();
-        } else {
-            while(node.getParent() != null && node.getParent().getRight() != node ) {
-                node = node.getParent();
+            node.parent = parent;
+            if (node.val < parent.val) {
+                parent.left = node;
+            } else {
+                parent.right = node;
             }
-            return node.getParent();
-        }
-    }
-
-    BinaryTreeNode leftMost(BinaryTreeNode root) {
-        while(root.getLeft() != null) {
-            root = root.getLeft();
         }
         return root;
     }
 
-    BinaryTreeNode rightMost(BinaryTreeNode root) {
-        while(root.getRight() != null) {
-            root = root.getRight();
-        }
-        return root;
-    }
-
-    public BinarySearchTree rotateLeft (BinaryTreeNode node) {
-        BinaryTreeNode nodeRight = node.getRight();
-        if (nodeRight != null) {
-            node.setRight(nodeRight.getLeft());
-            if (nodeRight.getLeft() != null) {
-                nodeRight.getLeft().setParent(node);
-            }
-            nodeRight.setParent(node.getParent());
-            if (node.getParent() == null) {
-                root = nodeRight;
-            } else if (node == node.getParent().getLeft()) {
-                node.getParent().setLeft(nodeRight);
+    public TreeNode search(TreeNode root, int val) {
+        TreeNode cur = root;
+        while (cur != null) {
+            if (val == cur.val) {
+                return cur;
+            } else if (val < cur.val) {
+                cur = cur.left;
             } else {
-                node.getParent().setRight(nodeRight);
+                cur = cur.right;
             }
-            nodeRight.setLeft(node);
-            node.setParent(nodeRight);
         }
-        return this;
+        return null;
     }
 
-    public BinarySearchTree rotateRight (BinaryTreeNode node) {
-        BinaryTreeNode nodeLeft = node.getLeft();
-        if (nodeLeft != null) {
-            node.setLeft(nodeLeft.getRight());
-            if (nodeLeft.getRight() != null) {
-                nodeLeft.getRight().setParent(node);
-            }
-            nodeLeft.setParent(node.getParent());
-            if (node.getParent() == null) {
-                root = nodeLeft;
-            } else if (node == node.getParent().getLeft()) {
-                node.getParent().setLeft(nodeLeft);
-            } else {
-                node.getParent().setRight(nodeLeft);
-            }
-            nodeLeft.setRight(node);
-            node.setParent(nodeLeft);
+    public TreeNode minimum(TreeNode root) {
+        if (root == null) {
+            return null;
         }
-        return this;
+        TreeNode cur = root;
+        while (cur.left != null) {
+            cur = cur.left;
+        }
+        return cur;
     }
 
+    public TreeNode maximum(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode cur = root;
+        while (cur.right != null) {
+            cur = cur.right;
+        }
+        return cur;
+    }
+
+    public TreeNode successor(TreeNode node) {
+        if (node == null) {
+            return null;
+        }
+        if (node.right != null) {
+            return minimum(node.right);
+        }
+        TreeNode cur = node, suc = node.parent;
+        while (suc != null && suc.left != cur) {
+            cur = suc;
+            suc = suc.parent;
+        }
+        return suc;
+    }
+
+    public TreeNode predecessor(TreeNode node) {
+        if (node == null) {
+            return null;
+        }
+        if (node.left != null) {
+            return maximum(node.left);
+        }
+        TreeNode cur = node, pred = node.parent;
+        while (pred != null && pred.right != cur) {
+            cur = pred;
+            pred = pred.parent;
+        }
+        return pred;
+    }
+
+    public static void printTree(TreeNode root) {
+        if (root != null) {
+            System.out.print(root.val + " ");
+            printTree(root.left);
+            printTree(root.right);
+        }
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree tree = new BinarySearchTree();
+        TreeNode node5 = new TreeNode(5);
+        TreeNode node8 = new TreeNode(8);
+        TreeNode node7 = new TreeNode(7);
+        TreeNode node6 = new TreeNode(6);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node2 = new TreeNode(2);
+
+        TreeNode root = tree.insert(node5, node8);
+        root = tree.insert(root, node7);
+        root = tree.insert(root, node6);
+        root = tree.insert(root, node3);
+        root = tree.insert(root, node4);
+        root = tree.insert(root, node2);
+//        printTree(root);
+        TreeNode node = tree.successor(node5);
+        System.out.println(node.val);
+    }
 }
