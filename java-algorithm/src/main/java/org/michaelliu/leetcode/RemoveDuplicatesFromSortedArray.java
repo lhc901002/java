@@ -17,9 +17,34 @@ public class RemoveDuplicatesFromSortedArray {
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] == nums[i - 1]) {
                 count++;
-                continue;
+            } else {
+                nums[i - count] = nums[i];
             }
-            nums[i - count] = nums[i];
+        }
+        return nums.length - count;
+    }
+
+    public static int removeDuplicates2(int[] nums) {
+        if (nums == null) {
+            return 0;
+        }
+        if (nums.length < 3) {
+            return nums.length;
+        }
+        int valCount = 1, count = 0;
+        for (int i = 1; i < nums.length; i++) {
+            // Get the number of elements with values same as current element
+            if (nums[i] == nums[i - 1]) {
+                valCount++;
+            } else {
+                valCount = 1;
+            }
+            // valCount > 2 means element meets 'duplicate' criteria. Count and remove duplicates.
+            if (valCount > 2) {
+                count++;
+            } else {
+                nums[i - count] = nums[i];
+            }
         }
         return nums.length - count;
     }

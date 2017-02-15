@@ -7,6 +7,7 @@ import java.util.HashMap;
  * Created by Michael on 1/25/17.
  */
 public class TwoSum {
+
     /**
      * Hash Map
      * Time: O(N)

@@ -7,7 +7,7 @@ import org.michaelliu.algorithm.tree.TreeNode;
  * Created by Michael on 2/6/17.
  */
 public class SortedListToBinarySearchTree {
-    
+
     public TreeNode sortedListToBST(ListNode head) {
         if (head == null) {
             return null;
