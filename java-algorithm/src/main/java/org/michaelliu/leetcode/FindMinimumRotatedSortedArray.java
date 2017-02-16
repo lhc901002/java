@@ -62,22 +62,41 @@ public class FindMinimumRotatedSortedArray {
      * Binary Search (This code is concise and logic clear)
      */
     public int findMin3(int[] nums) {
-        // without rotation, the first element has the minimum value
-        if (nums[0] < nums[nums.length - 1]) {
-            return nums[0];
+        if (nums == null || nums.length == 0) {
+            return -1;
         }
         int left = 0, right = nums.length - 1;
-        int mid = 0;
-        while (left < right) {
-            mid = left + (right - left) / 2;
+        while (left <= right) {
+            // nums[left] contains minimum value if nums[left...right] is already in ascending order.
+            if (nums[left] <= nums[right]) {
+                return nums[left];
+            }
+            int mid = left + (right - left) / 2;
             if (mid < right && nums[mid] > nums[mid + 1]) {
-                break;
+                return nums[mid + 1];
             } else if (nums[left] > nums[mid]) {
                 right = mid;
             } else {
                 left = mid + 1;
             }
         }
-        return nums[mid + 1];
+        return -1;
+    }
+
+    /** Problem 154 */
+    public int findMin4(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        if (nums.length == 1 || nums[0] < nums[nums.length - 1]) {
+            return nums[0];
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] > nums[i]) {
+                return nums[i];
+            }
+        }
+        return nums[0];
     }
 }
